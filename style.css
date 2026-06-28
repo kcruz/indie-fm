@@ -133,21 +133,6 @@ h1 span {
     border: 2px solid #4a2f7a;
 }
 
-.station-card::before,
-.station-card::after {
-    content: '';
-    position: absolute;
-    top: 6px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #1a0b2e;
-    box-shadow: inset 0 0 0 1px #5a3f8a;
-}
-
-.station-card::before { left: 6px; }
-.station-card::after { right: 6px; }
-
 .station-card:hover {
     transform: translate(-2px, -2px);
     border-color: var(--accent-2);
@@ -159,36 +144,90 @@ h1 span {
     box-shadow: 4px 4px 0 var(--accent), 0 0 20px rgba(255, 46, 136, 0.5);
 }
 
-/* Tape window with spinning reels */
-.cassette-window {
+/* Top index holes, like the alignment slots on a real cassette shell */
+.cassette-top-holes {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 28px;
+    margin-bottom: 6px;
+}
+
+.cassette-top-holes span {
+    width: 14px;
+    height: 5px;
+    border-radius: 2px;
     background: #100819;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Label area */
+.cassette-label {
+    background: var(--text-primary);
+    background-image: repeating-linear-gradient(180deg, rgba(0,0,0,0.04) 0 1px, transparent 1px 5px);
+    border-radius: 3px;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    color: #1a0b2e;
+}
+
+/* Tape window with spinning reels, like the clear plastic window on a cassette face */
+.cassette-window {
+    background: #0c0614;
     border: 1px solid #000;
-    border-radius: 4px;
-    height: 54px;
-    margin: 6px 4px 10px;
+    border-radius: 3px 3px 14px 14px;
+    height: 58px;
+    margin: 8px 10px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 16px;
+    padding: 0 14px;
     position: relative;
-    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.7);
 }
+
+.screw {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #1a0f29;
+    box-shadow: inset 0 0 0 1px #050208, 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.screw::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 1px;
+    right: 1px;
+    height: 1px;
+    background: #050208;
+}
+
+.screw.tl { top: 5px; left: 5px; }
+.screw.tr { top: 5px; right: 5px; }
+.screw.bl { bottom: 5px; left: 5px; }
+.screw.br { bottom: 5px; right: 5px; }
 
 .tape-strip {
     position: absolute;
-    left: 32px;
-    right: 32px;
+    left: 36px;
+    right: 36px;
     top: 50%;
-    height: 3px;
-    background: #4a3a20;
+    height: 8px;
+    background: #2a1f10;
+    border-top: 1px solid #4a3a20;
+    border-bottom: 1px solid #050505;
     transform: translateY(-50%);
 }
 
 .reel {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background: repeating-conic-gradient(#caa6ff 0deg 10deg, #100819 10deg 45deg);
+    background: #050208;
+    border: 2px solid #2a1f3f;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -202,27 +241,27 @@ h1 span {
     animation-play-state: running;
 }
 
+.reel .spokes {
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    background: repeating-conic-gradient(var(--accent-3) 0deg 4deg, transparent 4deg 60deg);
+    opacity: 0.85;
+}
+
 .reel .hub {
-    width: 10px;
-    height: 10px;
+    width: 11px;
+    height: 11px;
     border-radius: 50%;
     background: #1a0b2e;
     border: 1px solid var(--accent-3);
+    position: relative;
+    z-index: 2;
 }
 
 @keyframes spin-reel {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
-}
-
-/* Label area */
-.cassette-label {
-    background: var(--text-primary);
-    border-radius: 3px;
-    padding: 8px 10px;
-    display: flex;
-    align-items: center;
-    color: #1a0b2e;
 }
 
 .station-img {
@@ -274,15 +313,16 @@ h1 span {
 .cassette-feet {
     display: flex;
     justify-content: space-between;
-    padding: 0 18px;
-    margin-top: 8px;
+    padding: 0 22px;
+    margin-top: 6px;
 }
 
 .cassette-feet span {
-    width: 16px;
-    height: 4px;
-    border-radius: 2px;
-    background: #1a0b2e;
+    width: 10px;
+    height: 6px;
+    border-radius: 0 0 2px 2px;
+    background: #050208;
+    box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.06);
 }
 
 /* Player Bar */

@@ -89,11 +89,7 @@ function renderStations(stations) {
         const iconSrc = station.favicon ? station.favicon : 'https://cdn-icons-png.flaticon.com/512/4472/4472584.png';
 
         card.innerHTML = `
-            <div class="cassette-window">
-                <div class="reel left"><div class="hub"></div></div>
-                <div class="tape-strip"></div>
-                <div class="reel right"><div class="hub"></div></div>
-            </div>
+            <div class="cassette-top-holes"><span></span><span></span></div>
             <div class="cassette-label">
                 <img src="${iconSrc}" class="station-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/4472/4472584.png'">
                 <div class="station-info">
@@ -101,6 +97,13 @@ function renderStations(stations) {
                     <div class="station-location">${station.country} ${station.state ? '• ' + station.state : ''}</div>
                 </div>
                 <div class="play-icon">▶</div>
+            </div>
+            <div class="cassette-window">
+                <div class="screw tl"></div><div class="screw tr"></div>
+                <div class="reel left"><div class="spokes"></div><div class="hub"></div></div>
+                <div class="tape-strip"></div>
+                <div class="reel right"><div class="spokes"></div><div class="hub"></div></div>
+                <div class="screw bl"></div><div class="screw br"></div>
             </div>
             <div class="cassette-feet"><span></span><span></span></div>
         `;
