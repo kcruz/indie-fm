@@ -121,14 +121,15 @@ h1 span {
 /* Station Card — styled as a cassette tape shell */
 .station-card {
     --shell: #3a2a5e;
-    background: linear-gradient(180deg, var(--shell) 0%, #2c1f49 100%);
+    --shell-dark: #2c1f49;
+    background: linear-gradient(180deg, var(--shell) 0%, var(--shell-dark) 100%);
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s, background 0.4s;
     border-radius: 6px;
     padding: 14px 14px 10px;
     display: flex;
     flex-direction: column;
     cursor: pointer;
     position: relative;
-    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
     border: 2px solid #4a2f7a;
 }
 

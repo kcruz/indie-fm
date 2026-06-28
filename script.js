@@ -28,6 +28,44 @@ async function fetchStations() {
     }
 }
 
+// Sample a logo image and tint the cassette shell with its dominant color
+function tintCassetteFromLogo(iconSrc, cardElement) {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+        try {
+            const size = 16;
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, size, size);
+            const data = ctx.getImageData(0, 0, size, size).data;
+
+            let r = 0, g = 0, b = 0, count = 0;
+            for (let i = 0; i < data.length; i += 4) {
+                const alpha = data[i + 3];
+                if (alpha < 128) continue;
+                // Skip near-white/near-black pixels so the average isn't washed out
+                const lum = (data[i] + data[i + 1] + data[i + 2]) / 3;
+                if (lum > 240 || lum < 15) continue;
+                r += data[i]; g += data[i + 1]; b += data[i + 2];
+                count++;
+            }
+            if (count === 0) return;
+            r = Math.round(r / count);
+            g = Math.round(g / count);
+            b = Math.round(b / count);
+
+            cardElement.style.setProperty('--shell', `rgb(${r}, ${g}, ${b})`);
+            cardElement.style.setProperty('--shell-dark', `rgb(${Math.round(r * 0.5)}, ${Math.round(g * 0.5)}, ${Math.round(b * 0.5)})`);
+        } catch (e) {
+            // Logo served without CORS headers — canvas is tainted, keep default shell color
+        }
+    };
+    img.src = iconSrc;
+}
+
 // Render Cards
 function renderStations(stations) {
     container.innerHTML = ''; // Clear loader
@@ -73,6 +111,7 @@ function renderStations(stations) {
         });
 
         container.appendChild(card);
+        tintCassetteFromLogo(iconSrc, card);
 
         if (station.geo_lat && station.geo_long) {
             const lat = parseFloat(station.geo_lat);
