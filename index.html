@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IndieAtlas | Global Indie Radio</title>
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Indie<span>Atlas</span></h1>
+        <div class="subtitle">Streaming Global Independent Frequencies</div>
+    </header>
+
+    <div id="main-content">
+        <div id="map"></div>
+        <div id="station-panel">
+            <div id="station-container">
+                <div class="loader">Tuning into frequencies...</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="player-bar">
+        <div class="player-info">
+            <div class="visualizer" id="visualizer">
+                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            </div>
+            <div class="current-station-text">
+                <span id="now-playing-name">Select a station</span>
+                <span id="now-playing-status">Ready to play</span>
+            </div>
+        </div>
+
+        <audio id="audio-player" controls style="width: 60%; max-width: 400px;"></audio>
+    </div>
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""
+    ></script>
+    <script src="script.js"></script>
+</body>
+</html>
