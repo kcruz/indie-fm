@@ -118,40 +118,121 @@ h1 span {
     border-radius: 0;
 }
 
-/* Station Card */
+/* Station Card — styled as a cassette tape shell */
 .station-card {
-    background-color: var(--card-bg);
-    border-radius: 0;
-    padding: 15px;
+    --shell: #3a2a5e;
+    background: linear-gradient(180deg, var(--shell) 0%, #2c1f49 100%);
+    border-radius: 6px;
+    padding: 14px 14px 10px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     cursor: pointer;
+    position: relative;
     transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
     border: 2px solid #4a2f7a;
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
 }
+
+.station-card::before,
+.station-card::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #1a0b2e;
+    box-shadow: inset 0 0 0 1px #5a3f8a;
+}
+
+.station-card::before { left: 6px; }
+.station-card::after { right: 6px; }
 
 .station-card:hover {
     transform: translate(-2px, -2px);
-    background-color: #34205c;
     border-color: var(--accent-2);
     box-shadow: 4px 4px 0 var(--accent-2);
 }
 
 .station-card.playing {
     border-color: var(--accent);
-    background-color: #34205c;
     box-shadow: 4px 4px 0 var(--accent), 0 0 20px rgba(255, 46, 136, 0.5);
 }
 
+/* Tape window with spinning reels */
+.cassette-window {
+    background: #100819;
+    border: 1px solid #000;
+    border-radius: 4px;
+    height: 54px;
+    margin: 6px 4px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    position: relative;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.tape-strip {
+    position: absolute;
+    left: 32px;
+    right: 32px;
+    top: 50%;
+    height: 3px;
+    background: #4a3a20;
+    transform: translateY(-50%);
+}
+
+.reel {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: repeating-conic-gradient(#caa6ff 0deg 10deg, #100819 10deg 45deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    animation: spin-reel 2.5s linear infinite;
+    animation-play-state: paused;
+}
+
+.station-card.playing .reel {
+    animation-play-state: running;
+}
+
+.reel .hub {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #1a0b2e;
+    border: 1px solid var(--accent-3);
+}
+
+@keyframes spin-reel {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Label area */
+.cassette-label {
+    background: var(--text-primary);
+    border-radius: 3px;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    color: #1a0b2e;
+}
+
 .station-img {
-    width: 50px;
-    height: 50px;
+    width: 38px;
+    height: 38px;
     border-radius: 0;
     background-color: #333;
     object-fit: cover;
-    margin-right: 15px;
+    margin-right: 12px;
     border: 2px solid var(--accent-3);
+    flex-shrink: 0;
 }
 
 .station-info {
@@ -164,29 +245,43 @@ h1 span {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-bottom: 4px;
-    font-size: 1.2rem;
-    color: var(--text-primary);
+    margin-bottom: 2px;
+    font-size: 1.15rem;
+    color: #1a0b2e;
 }
 
 .station-location {
-    font-size: 0.95rem;
-    color: var(--text-secondary);
+    font-size: 0.9rem;
+    color: #5a3f8a;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .play-icon {
-    color: var(--accent-3);
-    font-size: 1.3rem;
+    color: var(--accent);
+    font-size: 1.2rem;
     opacity: 0;
     transition: opacity 0.2s;
-    text-shadow: 0 0 8px var(--accent-3);
+    margin-left: 6px;
 }
 
 .station-card:hover .play-icon,
 .station-card.playing .play-icon {
     opacity: 1;
+}
+
+.cassette-feet {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 18px;
+    margin-top: 8px;
+}
+
+.cassette-feet span {
+    width: 16px;
+    height: 4px;
+    border-radius: 2px;
+    background: #1a0b2e;
 }
 
 /* Player Bar */
